@@ -1,0 +1,60 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <div class="card">
+    <h5 class="card-header">Choose destination</h5>
+        <div class="card-body">
+              <form method="POST">
+                  {% csrf_token %}
+                  <div class="row">
+                      <div class="col">
+                          {{ form.departure_country.label_tag }}
+                          {{ form.departure_country }}
+                      </div>
+                      <div class="col">
+                          {{ form.arrival_country.label_tag }}
+                          {{ form.arrival_country }}
+                      </div>
+                      <div class="col">
+                          {{ form.date.label_tag }}
+                          {{ form.date }}
+                      </div>
+                  </div>
+                  
+                  <button type="submit" class="btn btn-warning" style="width: 100%; margin: 20px 0 20px 0">Search</button>
+              </form>
+              
+              {% if flights %}
+                <h5 style="margin: 20px 0 20px 0">Available Flights</h5>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Flight Number</th>
+                      <th>Airline</th>
+                      <th>From</th>
+                        <th>Departure Time</th>
+                      <th>To</th>
+                        <th>Arrival Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for flight in flights %}
+                      <tr>
+                        <td>{{ flight.flight_number }}</td>
+                        <td>{{ flight.airline }}</td>
+                          <td>{{ flight.departure_airport }}</td>
+                        <td>{{ flight.departure_time }}</td>
+                      <td>{{ flight.arrival_airport }}</td>
+                      <td>{{ flight.arrival_time }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              {% elif flights is not None %}
+                <p>No flights found for your search criteria.</p>
+              {% endif %}
+            
+        </div>      
+    </div>
+    
+{% endblock %}
