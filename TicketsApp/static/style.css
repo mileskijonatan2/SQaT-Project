@@ -1,0 +1,21 @@
+.seat-selection {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.seat-box {
+    border: 2px solid #007BFF;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.seat-box input[type="checkbox"]:checked {
+    background-color: #28a745;
+}
+
+.seat-box input[type="checkbox"]:not(:checked) {
+    background-color: #f8f9fa;
+}

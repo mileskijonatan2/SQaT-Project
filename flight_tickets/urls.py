@@ -16,9 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from TicketsApp.views import searchFlights
+from TicketsApp.views import searchFlights, flightDetails, passenger_details, booked_flights
+from django.conf.urls.static import static
+from django.conf import settings
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', searchFlights, name='index'),
-]
+    path('flight_details/<int:id>/', flightDetails, name='flight details'),
+    path('enter_details/<int:id>/', passenger_details, name='passengers details'),
+    path('booking_details/', booked_flights, name='booked flights'),
+    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

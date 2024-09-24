@@ -7,17 +7,21 @@
               <form method="POST">
                   {% csrf_token %}
                   <div class="row">
-                      <div class="col">
+                      <div class="col-3">
                           {{ form.departure_country.label_tag }}
                           {{ form.departure_country }}
                       </div>
-                      <div class="col">
+                      <div class="col-3">
                           {{ form.arrival_country.label_tag }}
                           {{ form.arrival_country }}
                       </div>
-                      <div class="col">
+                      <div class="col-3">
                           {{ form.date.label_tag }}
                           {{ form.date }}
+                      </div>
+                      <div class="col-3">
+                          {{ form.num_passengers.label_tag }}
+                          {{ form.num_passengers }}
                       </div>
                   </div>
                   
@@ -29,23 +33,23 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>Flight Number</th>
                       <th>Airline</th>
                       <th>From</th>
                         <th>Departure Time</th>
                       <th>To</th>
                         <th>Arrival Time</th>
+                        <th></th>
                     </tr>
                   </thead>
                   <tbody>
                     {% for flight in flights %}
                       <tr>
-                        <td>{{ flight.flight_number }}</td>
                         <td>{{ flight.airline }}</td>
                           <td>{{ flight.departure_airport }}</td>
                         <td>{{ flight.departure_time }}</td>
                       <td>{{ flight.arrival_airport }}</td>
                       <td>{{ flight.arrival_time }}</td>
+                      <td><a href="{% url 'flight details' flight.id %}">View Seats ></a></td>
                       </tr>
                     {% endfor %}
                   </tbody>

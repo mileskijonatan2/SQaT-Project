@@ -1,0 +1,75 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <div class="card">
+    <h5 class="card-header">
+        <div class="row" style="text-align: center">
+            <div class="col-2 d-flex align-items-center justify-content-center">
+                <h6>Airline</h6>
+            </div>
+            <div class="col-1 d-flex align-items-center justify-content-center">
+                <h6>Flight Number</h6>
+            </div>
+            <div class="col-3 d-flex align-items-center justify-content-center">
+                <h6>Departure</h6>
+                
+            </div>
+            <div class="col-1 d-flex align-items-center justify-content-center">
+                <div></div>
+            </div>
+            <div class="col-3 d-flex align-items-center justify-content-center">
+                <h6>Arrival</h6>
+            </div>
+            <div class="col-2 d-flex align-items-center justify-content-center">
+                <h6>Duration</h6>
+            </div>
+        </div></h5>
+        <div class="row" style="text-align: center; padding: 10px">
+            <div class="col-2 d-flex align-items-center justify-content-center">
+                <h6>{{ flight.airline.name }}</h6>
+            </div>
+            <div class="col-1 d-flex align-items-center justify-content-center">
+                <h6>{{ flight.flight_number }}</h6>
+            </div>
+            <div class="col-3 align-items-center justify-content-center">
+                <h6>{{ flight.departure_airport }}</h6>
+                <p>{{ flight.departure_time }}</p>
+            </div>
+            <div class="col-1 d-flex align-items-center justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+                </svg>
+            </div>
+            <div class="col-3 align-items-center justify-content-center">
+                <h6>{{ flight.arrival_airport }}</h6>
+                <p>{{ flight.arrival_time }}</p>
+            </div>
+            <div class="col-2 d-flex align-items-center justify-content-center">
+                <h6>{{ flight.duration }}</h6>
+            </div>
+        </div>
+                  
+    </div>
+    <div class="container" style="text-align: center; margin:30px 0 30px 0">
+    <h5>Select seats</h5>
+        <div><p>Number of passengers: {{ num_seats }}</p></div>
+        <form method="POST">
+        {% csrf_token %}
+        <div class="seat-selection">
+            {% for field in form %}
+                <div class="row">
+                <div class="col-2">
+                    {{ field }}  
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label> 
+                </div>
+                </div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-warning" id="confirm-btn">Confirm Selection</button>
+        </form>
+    
+    </div>
+    
+    
+    
+{% endblock %}

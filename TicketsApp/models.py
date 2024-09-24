@@ -63,7 +63,6 @@ class Seat(models.Model):
 class Booking(models.Model):
     user = models.ForeignKey(User, related_name='bookings', on_delete=models.CASCADE)
     flight = models.ForeignKey(Flight, related_name='bookings', on_delete=models.CASCADE)
-    seat = models.OneToOneField(Seat, related_name='booking', on_delete=models.CASCADE)
     booking_date = models.DateTimeField(auto_now_add=True)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
 
@@ -76,6 +75,7 @@ class Passenger(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     passport_number = models.CharField(max_length=20)
+    seat = models.OneToOneField(Seat, related_name='booking', on_delete=models.CASCADE)
     date_of_birth = models.DateField()
     country_of_residence = models.ForeignKey(Country, related_name='citizens', on_delete=models.CASCADE)
 

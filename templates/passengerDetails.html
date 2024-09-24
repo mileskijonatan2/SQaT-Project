@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="formset">
+            {{ formset.management_form }}
+            {% for form in formset %}
+                <div class="card">
+                <fieldset>
+                    <h5 class="card-header">Passenger {{ forloop.counter }} - Seat {{ form.seat_number.value }}</h5>
+                    <div class="card-body">
+                       {{ form.as_p }} 
+                    </div>
+                    
+                </fieldset>
+                </div>
+            {% endfor %}
+        </div>
+
+        <button class="btn btn-warning" type="submit">Confirm</button>
+    </form>
+    
+    
+        
+                  
+    
+    
+    
+    
+    
+    
+{% endblock %}
